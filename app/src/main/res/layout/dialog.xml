@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_name"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_look"
+        android:textSize="15sp"
+        android:text="查看"
+        android:textColor="@color/white"
+        android:layout_marginLeft="10dp"
+       />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_update"
+        android:textSize="15sp"
+        android:text="编辑"
+        android:textColor="@color/white"
+        android:layout_marginLeft="10dp"
+       />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="删除"
+        android:textColor="@color/white"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/dialog_delete"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="发送到桌面"
+        android:textColor="@color/white"
+        android:layout_marginLeft="10dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="添加到收藏"
+        android:textColor="@color/white"
+        android:layout_marginLeft="10dp"
+        />
+
+</LinearLayout>
