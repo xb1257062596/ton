@@ -70,10 +70,15 @@ public class LianFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
          view=inflater.inflate(R.layout.tab02,container,false);
         initView();
-        setData();
+        DatBaseLook();
         return view;
     }
 
+    /**
+     * @param savedInstanceState
+     * 用来判断数据是从何处穿过来的
+     * 从Add Activity 或者从UpdateActivity
+     */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
@@ -88,6 +93,11 @@ public class LianFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    /**
+     * @param str  从编辑活动传过来的 更新后的联系人姓名
+     * @param str1  更新联系人的位置 用来删除更新前的联系人
+     * 更新数据
+     */
     private void updateData(String str,int str1) {
 
         LianXiRen lianXiRen= (LianXiRen) mLianAdapter.getItem(str1);
@@ -97,6 +107,9 @@ public class LianFragment extends Fragment {
         addData(str);
     }
 
+    /**
+     * 为了实现和LianActivity通信的接口
+     */
     public interface ChuanshuListener{
            public String chuanshu();
            public int flag();
@@ -112,6 +125,10 @@ public class LianFragment extends Fragment {
         }
     }
 
+    /**
+     * @param str  需要添加的数据
+     *
+     */
     public  void addData(String str) {
 
        LianXiRen mLianXiRen=transform(str);
@@ -121,6 +138,10 @@ public class LianFragment extends Fragment {
         mLianAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * @param str  用来添加的联系人  将汉字转换成拼音
+     * @return 转换后的联系人
+     */
     public LianXiRen transform(String str){
         String firstName = null;
         LianXiRen lianxiren = new LianXiRen();
@@ -143,6 +164,9 @@ public class LianFragment extends Fragment {
        return lianxiren;
     }
 
+    /**
+     * 初始化控件
+     */
     private void initView() {
         mAddBtn = (FloatingActionButton)view.findViewById(R.id.mAddBtn);//需要修改
 
@@ -172,6 +196,10 @@ public class LianFragment extends Fragment {
        }
     }
 
+    /**
+     * @param input_info  查找是输入的姓名
+     * @return     返回包含该姓名所有的数据
+     */
     private List<LianXiRen> getNewData(String input_info){
         List<LianXiRen> mNewDatas= new ArrayList<>();
         for(LianXiRen lianXiRen:mDatas){
@@ -184,11 +212,14 @@ public class LianFragment extends Fragment {
         return mNewDatas;
     }
 
+    /**
+     * 各种点击事件
+     */
     private void eventView(){
         mListView.setAdapter(mLianAdapter);
 
 
-        searchView.addTextChangedListener(new TextWatcher() {
+        searchView.addTextChangedListener(new TextWatcher() {     //当搜索框中内容改变时
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -319,6 +350,9 @@ public class LianFragment extends Fragment {
     }
 
 
+    /**
+     * 遍历数据库
+     */
     private void DatBaseLook() {
          SQLiteDatabase db=myDataBaseHelper.getWritableDatabase();
         Cursor cursor= db.query("LianXiRen",null,null,null,null,null,null,null);
@@ -332,15 +366,14 @@ public class LianFragment extends Fragment {
         cursor.close();
     }
 
+    /**
+     * @param str
+     * 从数据库中删除数据
+     */
     private void DataBaseDelete(String str){
         SQLiteDatabase db=myDataBaseHelper.getWritableDatabase();
         db.delete("LianXiRen","name=?",new String[]{str});
     }
 
-
-    private void setData() {
-
-       DatBaseLook();
-    }
 
 }

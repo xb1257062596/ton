@@ -67,6 +67,10 @@ public class CallFragment extends Fragment {
         return  view;
     }
 
+
+    /**
+     * 注销广播
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -82,6 +86,10 @@ public class CallFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+
+    /**
+     * 控件的点击事件
+     */
     private void eventView() {
 
         mListView.setAdapter(callAdapter);
@@ -90,6 +98,21 @@ public class CallFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Information  information = mDatas.get(i);
+                Calendar c = Calendar.getInstance();
+                int  month=c.get(Calendar.MONTH)+1;
+                String month1=month+"";
+                if(month<10) {
+                    month1 = "0" + month;
+                }
+                int date = c.get(Calendar.DATE);
+                String date1=date+"";
+                if(date<10) {
+                    date1="0"+date;
+                }
+                int hour = c.get(Calendar.HOUR_OF_DAY);
+                int minute = c.get(Calendar.MINUTE);
+                information.setTime(month1+"."+date1+" "+hour+":"+minute);
+                information.setType("呼出");
                 addData(information);
                 mDatas.add(0,information);
                 callAdapter.notifyDataSetChanged();
@@ -111,6 +134,7 @@ public class CallFragment extends Fragment {
                 startActivity(intent2);
             }
         });
+
 
         mListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -142,6 +166,10 @@ public class CallFragment extends Fragment {
 
     }
 
+
+    /**
+     * 初始化控件
+     */
     private void initView() {
 
         myDataBaseHelper= new MyDataBaseHelper(getContext(),"TongXunLu1");
@@ -160,6 +188,11 @@ public class CallFragment extends Fragment {
 
 
     }
+
+
+    /**
+     * 写一个广播来改变mDatas的值
+     */
     public  class  MyBroadcastReceiver extends BroadcastReceiver{;
 
         @Override
@@ -177,23 +210,32 @@ public class CallFragment extends Fragment {
         }
     }
 
+
+    /**
+     * 查询数据库
+     */
     public void chaDataBase(){
         Cursor cursor=db.query("TongHua",null,null,null,null,null,null,null);
-        Information information=new Information();
         if(cursor.moveToFirst()){
             do{
+                Information information=new Information();
                 information.setName(cursor.getString(cursor.getColumnIndex("name")));
                 information.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
                 information.setAddress(cursor.getString(cursor.getColumnIndex("address")));
                 information.setTime(cursor.getString(cursor.getColumnIndex("time")));
                 information.setType(cursor.getString(cursor.getColumnIndex("type")));
                 information.setHarass(cursor.getString(cursor.getColumnIndex("harass")));
-                mDatas.add(information);
+                mDatas.add(0,information);
             }while (cursor.moveToNext());
         }
         cursor.close();
     }
 
+
+    /**
+     * @param information 代表各种信息
+     *  往数据库里面添加数据
+     */
     private void addData(Information information) {
         ContentValues values=new ContentValues();
         values.put("name",information.getName());

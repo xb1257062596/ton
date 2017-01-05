@@ -17,6 +17,7 @@ import com.example.a123.tongxunlu.R;
 
 /**
  * Created by 123 on 2016/12/26.
+ * 添加联系人
  */
 
 public class AddActivity extends Activity {
@@ -39,6 +40,9 @@ public class AddActivity extends Activity {
 
     }
 
+    /**
+     * 初始化控件
+     */
     private void initView() {
         add_cancle =(Button)this.findViewById(R.id.add_cancel);
 
@@ -49,6 +53,9 @@ public class AddActivity extends Activity {
         mAdd_phone=(EditText)this.findViewById(R.id.mAdd_phone);
     }
 
+    /**
+     * 给控件添加点击事件
+     */
     private void eventView(){
         myDataBaseHelper = new MyDataBaseHelper(this,"TongXunLu1");
 

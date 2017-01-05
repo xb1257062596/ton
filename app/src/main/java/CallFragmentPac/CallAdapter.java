@@ -48,10 +48,14 @@ public class CallAdapter extends ArrayAdapter<Information> {
         viewHolder.timeText.setText(information.getTime());
         viewHolder.typeText.setText(information.getType());
         viewHolder.harassText.setText(information.getHarass());
-        if(!information.getHarass().equals("骚扰")){
-           viewHolder.harassText.setVisibility(View.GONE);
-        }else {
-            viewHolder.harassText.setVisibility(View.VISIBLE);
+        try{
+            if(!information.getHarass().equals("骚扰")){
+                viewHolder.harassText.setVisibility(View.GONE);
+            }else {
+                viewHolder.harassText.setVisibility(View.VISIBLE);
+            }
+        }catch (Exception e){
+            viewHolder.harassText.setVisibility(View.GONE);
         }
         return convertView;
     }

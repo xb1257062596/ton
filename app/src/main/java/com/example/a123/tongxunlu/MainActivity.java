@@ -53,10 +53,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         eventView();
     }
 
+    /**
+     * @param intent 当从其他Activity返回到这个Activity时调用
+     */
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        setIntent(intent);
+        setIntent(intent);         //更新Intent
         Intent intent1=getIntent();
         try{
            str=intent1.getStringExtra("姓名");
@@ -162,6 +165,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    /**
+     * @param view
+     * 改变按钮颜色 在改变Fragment
+     */
     @Override
     public void onClick(View view) {
         resert();
@@ -181,12 +188,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * 先把所有颜色全变成黑色
+     */
     private void resert() {
         callText.setTextColor(ContextCompat.getColor(this,R.color.white));
         lianText.setTextColor(ContextCompat.getColor(this,R.color.white));
         huangText.setTextColor(ContextCompat.getColor(this,R.color.white));
     }
 
+    /**
+     * @return  用来与LianFragment通信
+     */
     @Override
     public String chuanshu() {
 

@@ -73,6 +73,9 @@ public class UpdateActivity extends Activity {
 
     }
 
+    /**
+     * 初始化空间
+     */
     private void initView() {
         update_cancel=(Button)this.findViewById(R.id.update_cancel);
         update_ok=(Button)this.findViewById(R.id.update_ok);
@@ -82,6 +85,10 @@ public class UpdateActivity extends Activity {
 
     }
 
+    /**
+     * @param str
+     * @return    通过姓名查找电话号码
+     */
     private String DataBaseLook(String str){
         SQLiteDatabase db=myDataBaseHelper.getWritableDatabase();
         String str2=null;
@@ -97,6 +104,11 @@ public class UpdateActivity extends Activity {
         return str2;
     }
 
+    /**
+     * @param str1
+     * @param str2
+     * 更新数据库
+     */
     private void DataBaseUpdate(String str1,String str2){
         SQLiteDatabase db=myDataBaseHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
